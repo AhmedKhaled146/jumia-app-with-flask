@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!-- Create a container to hold the cards -->
+<div class="container m-5 p-2">
+    <div class="row m-5 p-2">
+        {% for product in products %}
+        <div class="col-md-4 p-1">
+            <div class="card" style="width: 20rem;">
+                <img src="{{url_for('products.uploaded_file',filename=product.image)}}"/>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">Price: ${{ product.price }}</p>
+                    {% if product.in_stock %}
+                        <p class="card-text">In Stock: Yes</p>
+                    {% else %}
+                        <p class="card-text">In Stock: No</p>
+                    {% endif %}
+                    <a href="{{ url_for('products.product', id=product.id) }}" class="btn btn-primary">Details</a>
+                    <a href="{{ url_for('products.edit_product', id=product.id) }}" class="btn btn-secondary">Edit</a>
+                    <a href="{{ url_for('products.delete_product', id=product.id) }}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('products.create_product') }}" class="btn btn-success">Create Product</a>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container mt-5">
+  <table class="table border border-3">
+    <tr>
+      <th>Name</th>
+      <th>products</th>
+    </tr>
+    <tr>
+      <td>{{ currentCategory.name }}</td>
+      <td>
+        <table class="text-center">
+          <tr class="border border-3 border-dark">
+            <th class="border border-3 border-dark">Name</th>
+            <th class="border border-3 border-dark">Price</th>
+            <th class="border border-3 border-dark">Image</th>
+          </tr>
+          {%for product in currentCategory.products%}
+          <tr>
+            <td class="border border-3 border-dark p-3">{{ product.name }}</td>
+            <td class="border border-3 border-dark p-3">{{ product.price}}</td>
+            <td class="border border-3 border-dark p-3">
+              <img
+                src="{{url_for('products.uploaded_file',filename=product.image)}}"
+                class="rounded w-100"
+                height="75px"
+                alt="{{ product.name }}"
+              />
+            </td>
+        {%endfor%}
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+{% endblock %}
